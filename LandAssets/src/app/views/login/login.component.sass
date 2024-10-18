@@ -1,0 +1,70 @@
+@import "../../../assets/scss/variables"
+
+.background-login
+    background-image: url("../../../assets/images/login2.jpg")
+    background-size: cover
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+
+.submit-wrapper
+    cursor: default
+    margin-bottom: 10px
+    position: relative
+    > span
+        position: absolute
+        border: 1px solid
+        left: 110%
+        top: 17%
+        border-radius: 30px
+        margin-left: 20px
+        &:hover
+            ~ div.credentials
+                opacity: 1 !important
+    div.credentials
+            margin-left: 90px
+            opacity: 0
+            border-radius: 10px
+            background-color: rgb(217, 235, 232)
+            display: flex
+            width: max-content
+            flex-direction: column
+            z-index: 999
+            box-shadow: rgba(50, 50, 93, 0.25) -10px 10px 12px -2px
+            padding: 25px
+            position: absolute
+
+.container
+    overflow: visible 
+    position: absolute
+    display: flex
+    flex-direction: column
+    align-items: center
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    background-color: white
+    border-radius: 6px
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,rgba(0, 0, 0, 0.22) 0px 10px 10px
+    padding: 30px
+    box-sizing: border-box
+    max-height: 950px
+    min-height: 60%
+    height: fit-content
+    max-height: 750px
+    width: 400px
+
+    form
+        display: flex
+        flex-direction: column
+        width: 100%
+        align-items: center
+
+        .sign-link
+            cursor: pointer
+
+        app-flat-button
+            button
+                color: $cor_fundo !important

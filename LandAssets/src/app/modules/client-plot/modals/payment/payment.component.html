@@ -1,0 +1,39 @@
+<section class="Cadastro-modal" >
+    <div class="Wrapper">
+      <app-form [modal]="true" [parent]="this" [formGroup]="modalForm">
+        <div #myForm>
+          <div class="text-header title">
+            <span>Dados do Plot</span>
+          </div>
+          <mat-grid-list cols="12" rowHeight="90px" gutterSize="10">
+            <mat-grid-tile colspan="4">
+              <app-textfield formControlName="stateName" appearance="outline" class="fullwidth"
+                placeholder="State Name" />
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <app-textfield formControlName="plotNumber" appearance="outline" class="fullwidth"
+                placeholder="Plot Number" />
+            </mat-grid-tile>
+            <mat-grid-tile colspan="3">
+              <app-textfield type="numeric" formControlName="totalPrice" appearance="outline" class="fullwidth"
+                placeholder="Total Price" />
+            </mat-grid-tile>
+            <mat-grid-tile colspan="3">
+              <app-textfield type="numeric" formControlName="installmentPrice" appearance="outline" class="fullwidth"
+                placeholder="Installment Price" />
+            </mat-grid-tile>
+          </mat-grid-list>
+          <div class="text-header title">
+            <span>Payment Options</span>
+          </div>
+          <mat-grid-list cols="12" rowHeight="90px" gutterSize="10">
+            <mat-grid-tile colspan="6">
+              <app-form-radio formControlName="fullPayment" [collections]="radioValues"></app-form-radio>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+      </app-form>
+    </div>
+  </section>
+  
+  

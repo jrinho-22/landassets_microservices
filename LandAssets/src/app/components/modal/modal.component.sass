@@ -1,0 +1,71 @@
+
+@import "../../../assets/scss/variables"
+$fontsize: 22px
+$action-height: 10%
+$form-height: 90%
+
+$title-height: 10%
+$content-height: 90%
+
+@mixin size-styles($size) 
+    h1
+        color: $text_color_gray
+        text-align: center
+        height: $title-height
+        font-size: calc( $size * $fontsize)
+
+    .content
+        height: $content-height
+        display: flex
+        flex-direction: column
+
+        &.form-container
+            > div:first-child
+                height: 100% !important
+
+            form
+                display: flex
+                justify-content: space-between
+                flex-direction: column
+
+                > :first-child
+                    height: $form-height
+                    overflow: auto
+
+            :not(form *)
+                height: inherit
+
+        &:not(.form-container) 
+            > :first-child
+                height: 85%
+                > :not(mat-spinner):not(.actions)
+                    display: block
+                    overflow: auto
+                    height: 90%
+
+        app-flat-button
+            button
+                color: $cor_fundo !important
+
+.actions
+    margin-top: 40px
+    display: flex
+    height: $action-height
+    justify-content: space-evenly
+
+.modal-wrapper
+    padding: 20px 50px 20px
+    display: flex
+    flex-direction: column
+
+    &.sm 
+        @include size-styles(1)
+       
+
+    &.md 
+        @include size-styles(1.3)
+       
+
+    &.lg 
+        @include size-styles(1.6)
+       

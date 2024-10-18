@@ -1,0 +1,60 @@
+<div class="table-container">
+  <h1>{{title}}</h1>
+  <ng-container>
+    <ng-container [ngSwitch]="true">
+      <ng-container *ngSwitchCase="loading">
+        <mat-spinner class="spinner" diameter="60"></mat-spinner>
+      </ng-container>
+      <table *ngSwitchCase="!loading">
+        <thead>
+          <tr>
+            <th *ngFor="let header of headers">
+              {{ header.label }}
+            </th>
+            <th *ngIf="defaultActions || actionsRef">Actions</th>
+          </tr>
+        </thead>
+        <ng-container [ngSwitch]="true">
+          <tbody *ngSwitchCase="!collections?.length">
+            <tr>
+              <td [attr.colspan]="headers.length + 1">
+                No items found
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngSwitchCase="!!collections?.length">
+            <tr *ngFor="let item of currentCollection">
+              <td *ngFor="let header of headers">
+                <ng-container *ngIf="header.render; else defaulValue">
+                  {{ header.render(getField(item, header.field)) }}
+                </ng-container>
+                <ng-template #defaulValue>
+                  {{getField(item, header.field) }}
+                </ng-template>
+              </td>
+              <td *ngIf="defaultActions || actionsRef">
+                <div>
+                  <ng-template [ngTemplateOutlet]="actionsRef"
+                    [ngTemplateOutletContext]="{$implicit: item}"></ng-template>
+                </div>
+                <div *ngIf="defaultActions">
+                  <app-icon-button tooltipText="Vizulaizar item" (buttonClick)="visualizar(item)"
+                    icon="i-visualizar"></app-icon-button>
+                  <app-icon-button [ngStyle]="{'margin': '0 5px'}" tooltipText="Editar item"
+                    (buttonClick)="editar(item)" icon="i-editar"></app-icon-button>
+                  <app-icon-button tooltipText="Excluir item" (buttonClick)="excluir(item)"
+                    icon="i-excluir"></app-icon-button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </ng-container>
+      </table>
+      <app-pagination (loading)="setLoading($any($event))" [itemsLengthAllowed]="4"
+        (currentCollection)="getCurrentCollection($event)" [collections]="collections || []"></app-pagination>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noContent>
+</ng-template>

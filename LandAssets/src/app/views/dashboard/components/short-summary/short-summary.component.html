@@ -1,0 +1,16 @@
+<div class="upperWrapper">
+    <div class="content">
+        <h1>Find it. Own it</h1>
+        <h5>Wheather you need a residential or commercial plot of any size and garanteed title deed. We've got you
+            covered.
+        </h5>
+        <div class="buttons">
+            <app-select [syncValue]="selectedState" placeholder="STATE" value="name" label="name" [options]="states"
+                (dataEvent)="receiveSelectData($event)" />
+            <!-- <app-flat-button text="BECOME AN AGENT" /> -->
+        </div>
+    </div>
+</div>
+<div class="lowerWrapper">
+    <app-chart />
+</div>

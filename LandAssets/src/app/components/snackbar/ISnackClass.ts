@@ -1,0 +1,1 @@
+export type ISnackClass = { success: string, error: string }

@@ -1,0 +1,67 @@
+@import "../../../../assets/scss/variables"
+
+app-select:not(.basic-style),
+app-form-select:not(.basic-style)
+    label
+        color: white !important
+        top: 20px !important
+    mat-select
+        color: white !important
+
+    mat-form-field
+        .mdc-floating-label--float-above
+            translate: 0 -7px
+        .mat-mdc-form-field-infix
+            padding-top: 18px !important
+        .mat-mdc-form-field-focus-overlay
+            background-color: transparent
+        .mdc-text-field--filled
+            border: 1px solid $cor_fundo
+            background-color: transparent !important
+        .mdc-line-ripple::after
+            display: none
+        .mat-mdc-text-field-wrapper
+            overflow: visible
+            height: 40px
+        .mat-mdc-select-arrow
+            color: white !important
+        .mat-mdc-select-value
+            translate: 0 -7px
+        .mdc-text-field--filled
+            border: none
+            border-bottom: 1px solid $cor_fundo
+            border-right: 1px solid $cor_fundo
+            border-left: 1px solid $cor_fundo
+            &::before
+                content: ""
+                position: absolute
+                top: 0
+                width: 12px
+                left: 0
+                height: 1px 
+                background-color: $cor_fundo
+            &::after
+                content: ""
+                position: absolute
+                top: 0
+                left: 55px
+                width: calc( 100% - 55px )
+                height: 1px 
+                background-color: $cor_fundo
+
+
+app-select.basic-style,
+app-form-select.basic-style
+    width: 100%
+    &.small
+        mat-form-field
+            height: 77px
+    mat-form-field
+        .mat-mdc-form-field-focus-overlay
+            background-color: white
+        .mdc-text-field--filled
+            background-color: transparent !important
+        .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above
+            color: $cor_fundo
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after
+            border-bottom-color: $cor_fundo !important

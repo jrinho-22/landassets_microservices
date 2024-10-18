@@ -1,0 +1,47 @@
+@import "../../../../../assets/scss/variables"
+
+.upperWrapper
+    position: absolute
+    left: 50%
+    translate: -50%
+    margin-top: calc( $menu_height + 40px)
+
+.lowerWrapper
+    position: absolute
+    border-radius: 20px
+    width: 75%
+    left: 50%
+    top: 90%
+    translate: -50%
+    padding: 15px 10px
+    background-color: white
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px
+    z-index: 800
+
+.content
+    background-color: #000000b9
+    padding: 20px
+    width: max-content
+    border-radius: 20px
+
+h1
+    margin-bottom: 20px
+    font-size: 60px
+    color: white
+
+h5
+    font-size: 15px
+    margin-bottom: 30px
+    letter-spacing: 1px
+    color: white
+
+app-flat-button
+    margin: 0 10px
+
+.buttons
+    display: flex
+
+// :host ::ng-deep 
+// app-select
+    // .mat-form-field
+        // width: 100% !important

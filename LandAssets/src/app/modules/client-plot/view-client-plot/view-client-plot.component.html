@@ -1,0 +1,7 @@
+<div class="table-wrapper">
+    <app-table title="My plots" [defaultActions]="false" [model]="salesModel" [basePath]="basePath" idField="salesId" [collections]="collection" [headers]="headers">
+        <ng-template #actions let-item>
+            <app-icon-button [tooltipText]="!item.remainingInstallments ? 'Pagamentos já realizados' : 'Realizar pagamento'" (buttonClick)="openDialog(item)" icon="i-simbolo-dinheiro-alt" [disabled]="!item.remainingInstallments"></app-icon-button>
+        </ng-template>
+    </app-table>
+</div>

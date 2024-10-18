@@ -1,0 +1,53 @@
+<section class="Cadastro">
+  <div class="Header">
+    <!-- <span class="i-seta-esq"></span> -->
+    <!-- <span> goback</span> -->
+    <h1>Cadastro de Plots</h1>
+  </div>
+  <div class="Wrapper">
+    <div class="text-header title">
+      <span>Dados do Plot</span>
+    </div>
+    <app-form [parent]="this" [model]="plotModel" [formGroup]="plotForm">
+      <mat-grid-list cols="9" rowHeight="90px" gutterSize="10">
+        <mat-grid-tile colspan="2">
+          <app-textfield type="number" formControlName="number" appearance="outline" class="fullwidth"
+            placeholder="Plot Number" />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <app-form-select class="basic-style" formControlName="estateId" [options]="states" label="name" value="estateId"/>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <app-textfield type="numeric"
+            maxValue="99999" formControlName="pricePerSQM" appearance="outline" class="fullwidth"
+            placeholder="Price per SQM" />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <app-textfield maxValue="99999" type="number"
+          suffix="m2" formControlName="size" appearance="outline" class="fullwidth" placeholder="Size" />
+        </mat-grid-tile>  
+        <mat-grid-tile colspan="3">
+          <app-textfield type="numeric"
+            maxValue="99999" formControlName="priceSQMPartialPayment" appearance="outline"
+            class="fullwidth" placeholder="Price per SQM Partial Payment" />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <app-textfield type="numeric"
+            maxValue="999999999" formControlName="totalCashPrice" appearance="outline" class="fullwidth"
+            placeholder="Cash Price" />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <app-textfield type="numeric"
+            maxValue="999999999" formControlName="totalPartialPaymentPrice" appearance="outline"
+            class="fullwidth" placeholder="Partial Payment Price" />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <app-textfield type="numeric"
+            maxValue="999999" formControlName="firstInstallment" appearance="outline" class="fullwidth"
+            placeholder="First Installment" />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </app-form>
+  </div>
+  <app-snackbar/>
+</section>

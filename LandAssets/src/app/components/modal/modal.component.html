@@ -1,0 +1,18 @@
+<!-- <ng-container [ngTemplateOutlet]="data.template"></ng-container> -->
+<!-- <ng-template dynamicDirective></ng-template> -->
+  <div [ngStyle]="modalSize" [ngClass]="this.data.size" class="modal-wrapper">
+    <h1>{{ data.text.title }}</h1>
+    <div [class.form-container]="formContainer" class="content">
+      <div [class.hide]="loading">
+          <ng-container #mycontainer></ng-container>
+      </div>
+      <mat-spinner *ngIf="loading" class="spinner" diameter="60"></mat-spinner> 
+    </div>
+  </div>  
+
+<ng-template #actionsTemplate>
+  <div class="actions">
+    <app-flat-button [text]="data.text.close" (buttonClick)="onActionButtonClose()" />
+    <app-flat-button type="submit" [text]="data.text.action" />
+  </div>
+</ng-template>

@@ -1,0 +1,7 @@
+<form #ngForm="ngForm" (ngSubmit)="submit()" [formGroup]="formGroup">
+    <ng-content>
+    </ng-content>
+    <div class="submit-wrapper">
+        <app-flat-button *ngIf="!modal && formType !== 'view'" style="margin-left: auto; width: 140px" type="submit" text="SUBMIT" />
+    </div>
+</form>

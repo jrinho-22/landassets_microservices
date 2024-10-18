@@ -1,0 +1,12 @@
+<ng-container [ngSwitch]="true" >
+    <div *ngSwitchCase="authenticated == 'conceded'">
+        <app-header />
+        <router-outlet/>
+    </div>
+    <div *ngSwitchCase="authenticated == 'denied'">
+        <app-login/>
+    </div>
+    <div class="spinner-wrapper" *ngSwitchDefault>
+        <mat-spinner class="spinner" diameter="60"></mat-spinner> 
+    </div>
+</ng-container>

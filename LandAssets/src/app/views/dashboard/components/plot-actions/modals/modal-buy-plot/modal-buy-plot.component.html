@@ -1,0 +1,60 @@
+<section class="Cadastro-modal" >
+  <div class="Wrapper">
+    <app-form [modal]="true" [parent]="this" [model]="SaleModel" [formGroup]="modalForm">
+      <div #myForm>
+        <div class="text-header title">
+          <span>Dados do Terreno</span>
+        </div>
+        <mat-grid-list cols="12" rowHeight="90px" gutterSize="10">
+          <mat-grid-tile colspan="4">
+            <app-textfield formControlName="stateName" appearance="outline" class="fullwidth"
+              placeholder="State Name" />
+          </mat-grid-tile>
+          <mat-grid-tile colspan="3">
+            <app-textfield formControlName="plotNumber" appearance="outline" class="fullwidth"
+              placeholder="Plot Number" />
+          </mat-grid-tile>
+          <mat-grid-tile colspan="3">
+            <app-textfield suffix="m2" formControlName="size" appearance="outline" class="fullwidth"
+              placeholder="Plot size" />
+          </mat-grid-tile>
+        </mat-grid-list>
+        <div class="text-header">
+          <span>Opçoes de Pagamento</span>
+        </div>
+        <mat-grid-list cols="12" rowHeight="90px" gutterSize="10">
+          <ng-container formGroupName="saleForm">
+          <mat-grid-tile colspan="3">
+            <app-textfield type="numeric" formControlName="totalCost" appearance="outline" class="fullwidth"
+              placeholder="Total Price" />
+          </mat-grid-tile>
+          <mat-grid-tile colspan="3">
+              <app-form-select class="basic-style" formControlName="paymentType" [options]="paymentTypeCollection" label="label" value="value"/>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="paymentControl?.value == 'partial'" colspan="3">
+            <app-textfield type="number" maxValue="99" formControlName="totalInstallments" appearance="outline" class="fullwidth"
+              placeholder="Parcelas" />
+          </mat-grid-tile>
+        </ng-container>
+        </mat-grid-list>
+        <div class="text-header ">
+          <span>Dados do Cartão</span>
+        </div>
+        <mat-grid-list cols="12" rowHeight="90px" gutterSize="10">
+          <mat-grid-tile colspan="6">
+            <app-textfield [mask]="cardNumberMask" formControlName="cardNumber" appearance="outline" class="fullwidth"
+              placeholder="Numero do Cartão" />
+          </mat-grid-tile>
+          <mat-grid-tile colspan="3">
+            <app-textfield [mask]="cardValidadeMask" formControlName="validade" appearance="outline" class="fullwidth" placeholder="Validade" />
+          </mat-grid-tile>
+          <mat-grid-tile colspan="3">
+            <app-textfield [mask]="cardCodigoMask" formControlName="codigoSeguranca" appearance="outline" class="fullwidth"
+              placeholder="Codigo de Segurança" />
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </app-form>
+  </div>
+</section>
+

@@ -1,0 +1,105 @@
+# version: '3.8'
+services:
+  service1:
+    image: service1_dev:latest
+    build:
+      context: .
+      dockerfile: apps/service1/Dockerfile
+      target: development
+      # command: node dist/apps/service1/main
+    env_file:
+      - ./envs/service1/development.env # Specify the path to your custom env file
+      - db.development.env
+      - ./rabbit.env
+    ports:
+      - 3001:3001
+    networks:
+      - proxynet
+    volumes:
+      - ./apps:/usr/src/app/apps
+      - ./libs:/usr/src/app/libs
+      - /usr/src/app/dist
+      # environment:
+      # NODE_ENV: development
+    depends_on:
+      - rabbit
+      - db
+  sales:
+    image: sales_dev:latest
+    build:
+      context: .
+      dockerfile: apps/sales/Dockerfile
+      target: development
+      # command: node dist/apps/service1/main
+    env_file:
+      - ./envs/sale/development.env # Specify the path to your custom env file
+      - db.development.env
+      - ./rabbit.env
+    ports:
+      - 3005:3005
+    networks:
+      - proxynet
+    volumes:
+      - ./apps:/usr/src/app/apps
+      - ./libs:/usr/src/app/libs
+      - /usr/src/app/dist
+      # environment:
+      # NODE_ENV: development
+    depends_on:
+      - rabbit
+      - db
+  auth:
+    image: auth_dev:latest
+    build:
+      context: .
+      dockerfile: apps/auth/Dockerfile
+      target: development
+    # command: npm run start:dev auth
+    ports:
+      - 3003:3003
+    networks:
+      - proxynet
+    volumes:
+      - ./apps:/usr/src/app/apps
+      - ./libs:/usr/src/app/libs
+      - /usr/src/app/dist
+    env_file:
+      - ./envs/auth/development.env
+      - db.development.env
+      - ./rabbit.env
+      # environment:
+      # NODE_ENV: development
+    depends_on:
+      - rabbit
+      - db
+  rabbit:
+    image: my-rabbitmq
+    build:
+      context: .
+      dockerfile: rabbit.Dockerfile
+    restart: always
+    env_file: ./rabbit.env
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+      - proxynet
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: juninho22
+      MYSQL_DATABASE: nest
+    ports:
+      - "3307:3306"
+    networks:
+      - proxynet
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+
+networks:
+  proxynet:
+    name: custom_network

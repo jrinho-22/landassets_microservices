@@ -1,0 +1,13 @@
+<div class="paginator">
+    <div class="style-helper">
+        <app-icon-button (buttonClick)="handleArrow('left')" icon="i-seta-esq" [disabled]="activePage.getValue() == 1 || !collections.length"></app-icon-button>
+        <span class="dots" [class.hide-span]="!leftDots">...</span>
+        <div class="pages-wrapper">
+            <ng-container *ngFor="let page of generateNumberArray()">
+                <span (click)="handleClick(page)" [class.active]="activePage.getValue() == page && !localLoading">{{page}}</span>
+            </ng-container>
+        </div>
+        <span class="dots" [class.hide-span]="!rightDots">...</span>
+        <app-icon-button (buttonClick)="handleArrow('right')" icon="i-seta-dir" [disabled]="activePage.getValue() == pagination || !collections.length"></app-icon-button>
+    </div>
+</div>

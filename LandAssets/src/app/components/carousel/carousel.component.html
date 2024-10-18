@@ -1,0 +1,31 @@
+<div>
+    <p-carousel (onPage)="handlePageChange($event)" [page]=activeStateIndex [value]="myList" [circular]="true">
+        <ng-template let-state pTemplate="item">
+            <div class="contentWrapper">
+                <div class="topWrapper">
+                    <span> {{state.name}}</span>
+                </div>
+                <div class="bottomWrapper">
+                    <ng-container *ngIf="state.img">
+                        <div class="imageWrapper">
+                            <advanced-image [cldImg]="state.img"></advanced-image>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+    <!-- <h1>headerrr</h1>
+
+    <ng-container *ngFor="let item of states">
+        <ng-container *ngFor="let item2 of customRef">
+            <ng-template [ngTemplateOutlet]="item == item2.item ? item2.ref : default"
+                [ngTemplateOutletContext]="{ $implicit: item }" />
+
+            <ng-template #default let-item>
+                {{item}}
+            </ng-template>
+        </ng-container>
+    </ng-container>
+    <ng-content></ng-content> -->
+</div>

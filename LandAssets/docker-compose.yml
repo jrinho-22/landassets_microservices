@@ -1,0 +1,23 @@
+# version: '3.8'
+services:
+  front:
+    image: angularc:latest
+    build:
+      dockerfile: Dockerfile
+      context: .
+    # command: ng serve --host 0.0.0.0 --watch
+    ports:
+      - 4201:80
+    environment:
+      NODE_ENV: development
+    networks:
+      - my-proxy-net
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      # - /usr/src/app/dist
+
+networks:
+  my-proxy-net:
+    external: true
+    name: custom_network

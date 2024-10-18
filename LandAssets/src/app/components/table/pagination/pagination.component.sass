@@ -1,0 +1,40 @@
+@import ../../../../assets/scss/variables
+.paginator
+    margin-top: 10px
+    display: flex
+    justify-content: center
+    .style-helper
+        transition: transform 0.3s ease-in-out
+        display: inline-flex
+        justify-content: center
+        align-items: center
+        > span
+            &.dots
+                cursor: default
+            &:hover:not(.dots)
+                transform: scale(1.2)
+            &.hide-span
+                cursor: default
+                opacity: 0
+        .pages-wrapper span:not(.active)
+            border-bottom: 2px solid transparent
+        .pages-wrapper
+            &:hover
+                span
+                    border-bottom: 2px solid transparent !important
+            span
+                transition: border-bottom 300ms ease-in-out
+                &.active
+                    border-bottom: 2px solid $cor_fundo
+                + span
+                    margin-left: 10px
+                &:hover
+                    border-bottom: 2px solid $primary !important
+    span
+        cursor: pointer
+        padding: 0 7px 0px 6px
+        &.disabled
+            &:hover
+                transform: none !important
+            cursor: default 
+            color: gray

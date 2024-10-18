@@ -1,0 +1,39 @@
+<ng-container *ngIf="loginForm.getValue(); else signUpRef">
+  <div class="background-login">
+    <div class="container">
+      <app-logo [login]="true" style="margin-bottom: 30px" />
+      <form (ngSubmit)="login()" [formGroup]="loginData">
+        <app-textfield formControlName="email" appearance="outline" class="fullwidth" placeholder="email"
+          maxLenght="5" />
+        <app-textfield [ngStyle]="{'margin-top': '13px', 'margin-bottom': '13px'}" formControlName="password"
+          appearance="outline" [password]="true" class="fullwidth" placeholder="Password" />
+        <div class="submit-wrapper">
+          <app-flat-button type="submit" text="LOGIN" />
+          <span class="i-exclamation"></span>
+          <div class="credentials">
+            <span>email: <span style="font-style: italic">admin@gmail.com | client@gmail.com</span></span>
+            <span>password: <span style="font-style: italic">123</span> </span>
+          </div>
+        </div>
+        <span>or</span>
+        <span class="sign-link" (click)="change()">Signup</span>
+      </form>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #signUpRef>
+  <div class="background-login">
+    <div class="container">
+      <app-logo [login]="true" style="margin-bottom: 30px" />
+      <form (ngSubmit)="signUp()" [formGroup]="loginData">
+        <app-textfield formControlName="name" appearance="outline" class="fullwidth" placeholder="nome" />
+        <app-textfield [ngStyle]="{'margin-top': '10px', 'margin-bottom': '10px'}" formControlName="email"
+          appearance="outline" class="fullwidth" placeholder="email" />
+        <app-textfield formControlName="password" appearance="outline" class="fullwidth" placeholder="Password" />
+        <app-flat-button [ngStyle]="{'margin-bottom': '15px'}" type="submit" text="SIGNUP" />
+        <span class="sign-link" (click)="change()">back to signin</span>
+      </form>
+    </div>
+  </div>
+</ng-template>

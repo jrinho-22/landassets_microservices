@@ -1,0 +1,109 @@
+<section class="Cadastro">
+  <div class="Header">
+    <!-- <span class="i-seta-esq"></span> -->
+    <!-- <span> goback</span> -->
+    <h1>Cadastro de Estado</h1>
+  </div>
+  <div class="Wrapper">
+    <div class="text-header title">
+      <span>Dados do Estado</span>
+    </div>
+    <app-form [parent]="this" [model]="EstateModel" [formGroup]="stateForm">
+      <mat-grid-list cols="9" rowHeight="90px" gutterSize="10">
+        <mat-grid-tile colspan="4">
+          <app-textfield
+            formControlName="name"
+            appearance="outline"
+            class="fullwidth"
+            placeholder="State Name"
+          />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <app-textfield
+            formControlName="size"
+            appearance="outline"
+            class="fullwidth"
+            placeholder="Size"
+            type="number"
+            suffix="m2"
+          />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <app-textfield
+            maxValue="9999"
+            suffix="km"
+            formControlName="oceanDistance"
+            appearance="outline"
+            class="fullwidth"
+            placeholder="Ocean Distance"
+            type="number"
+          />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+          <app-textfield
+            type="number"
+            formControlName="plotsAvailable"
+            appearance="outline"
+            class="fullwidth"
+            value="stateFields"
+            placeholder="Plots"
+          />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <app-textfield
+            formControlName="population"
+            appearance="outline"
+            class="fullwidth"
+            value="stateFields"
+            placeholder="Population"
+            type="number"
+          />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <app-textfield
+            type="number"
+            formControlName="counties"
+            appearance="outline"
+            class="fullwidth"
+            value="stateFields"
+            placeholder="Counties"
+          />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <app-form-select class="basic-style" formControlName="paymentTerm" [options]="paymentTermValues" label="label" value="value"/>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <app-textfield
+            type="numeric"
+            maxValue="9999"
+            formControlName="averagePricePerSQM"
+            appearance="outline"
+            class="fullwidth"
+            value="stateFields"
+            placeholder="Average Price per SQM"
+          />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <app-textfield
+            type="numeric"
+            maxValue="9999"
+            formControlName="averagePartialPaymentPrice"
+            appearance="outline"
+            class="fullwidth"
+            value="stateFields"
+            placeholder="Average Partial Payment Price"
+          />
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4">
+          <input
+            [ngClass]="stateForm.get('imgName')?.invalid && (stateForm.get('imgName')?.touched || stateForm.get('imgName')?.dirty) ? 'invalid' : undefined"
+            #fileInput
+            type="file"
+            (change)="onFileSelected($event)"
+            placeholder="input"
+          />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </app-form>
+  </div>
+</section>

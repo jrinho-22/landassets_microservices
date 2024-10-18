@@ -1,0 +1,14 @@
+<!-- <form [formGroup]="form"> -->
+<ng-container *ngIf="controlContainer?.control" [formGroup]="$any(controlContainer.control)">
+    <mat-form-field>
+        <mat-label>{{placeholder}}</mat-label>
+        <mat-select [errorStateMatcher]="matcher" [formControlName]="formControlName">
+            <ng-container *ngFor="let option of options">
+                <mat-option [value]="$any(option)[value]">{{$any(option)[label]}}</mat-option>
+            </ng-container>
+        </mat-select>
+        <mat-error>{{errorMsg}}</mat-error>
+    </mat-form-field>
+</ng-container>
+<!-- </form> -->
+<!-- {{form.value}} -->

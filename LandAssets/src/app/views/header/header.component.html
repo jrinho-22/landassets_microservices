@@ -1,0 +1,72 @@
+<section [class.Menu_reduzido]="isScrolledDown" class="Menu_desk">
+
+    <div class="Menu_top">
+        <div class="Menu_superior">
+            <span class="i-facebook"></span>
+            <span class="i-instagram"></span>
+            <span class="i-email"></span>
+            <span class="i-pesquisar"></span>
+        </div>
+    </div>
+    <div class="Menu_left">
+        <app-logo />
+    </div>
+    <div class="Menu_right">
+
+
+        <div class="Menu_right_group">
+            <div *ngFor="let item of items" class="Menu_right_drop_wrapper" (mouseleave)="onMouseLeave()">
+                <ng-container *ngIf="allowMenuItem(item)">
+                    <span (click)="navigate(item.path)" (mouseenter)="onMouseEnter(item.label)">{{item.label}}</span>
+                    <div [class.view]="hoverItem == item.label" class="Menu_right_drop">
+
+                        <ul *ngIf="item.children != undefined && item.children.length">
+                            <li [class.children]="children.children != undefined && children.children.length"
+                                *ngFor="let children of item.children" (mouseleave)="onMouseLeaveGran()"
+                                (mouseenter)="onMouseEnterGran(children.label)" (click)="navigate(children.path)">
+                                {{children.label}}
+
+                                <div [class.view]="children.label == hoverChildrenItem"
+                                    *ngIf="children.children != undefined && children.children.length"
+                                    class="granChildreWrapp">
+                                    <ul>
+                                        <li (click)="navigate(granchildren.path)"
+                                            *ngFor="let granchildren of children.children">
+                                            {{granchildren.label}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </ng-container>
+            </div>
+            <!-- <div class="Menu_right_drop_wrapper">
+                <span>MENU</span>
+                <div class="Menu_right_drop">
+                    <ul>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="Menu_right_drop_wrapper">
+                <span>CADASTROS</span>
+                <div class="Menu_right_drop">
+                    <ul>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+
+
+        <div class="Menu_right_group">
+            <app-flat-button (buttonClick)="logout()" text="LOGOUT" />
+            <!-- <app-flat-button text="BECOME AN AGENT" /> -->
+        </div>
+    </div>
+</section>

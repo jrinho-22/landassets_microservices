@@ -1,0 +1,75 @@
+@import "../../../assets/scss/variables"
+.table-container 
+    // max-width: 100% /* or a specific width */
+    // max-height: 500px /* or a specific height */
+    // overflow: auto
+    text-align: center
+    height: 330px
+    margin-top: calc($reduced_menu_height + 30px)
+    margin-bottom: 80px
+
+    h1
+        color: $text_color_gray
+        margin-right: 380px
+        margin-bottom: 30px
+
+.no-content
+    position: absolute
+    left: 50%
+    translate: -50%
+    margin-top: calc( $menu_height + 40px)
+
+table
+    height: inherit
+    margin: auto
+    background-color: $background_color
+    // height: 800px
+    // height: 500px
+    border-collapse: collapse
+    font-size: 0.9em
+    min-width: 400px
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+    overflow-y:scroll
+    // height: 300px
+    display:block
+
+
+table thead tr 
+    background-color: #009879
+    color: #ffffff
+    text-align: left
+
+
+table th,
+table td 
+    text-align: center
+    padding: 12px 15px
+
+table tbody 
+    // height: 200px
+    overflow-y: scroll  
+
+table tbody tr 
+    height: 70px
+    border-bottom: 1px solid #dddddd
+    td:last-of-type
+        div
+            display: flex
+            justify-content: center
+
+
+table tbody tr:nth-of-type(even) 
+    background-color: #f3f3f3
+
+
+table tbody tr:last-of-type 
+    border-bottom: 2px solid #009879
+    
+
+
+table tbody tr.active-row 
+    font-weight: bold
+    color: #009879
+
+.pagination
+    display: flex
