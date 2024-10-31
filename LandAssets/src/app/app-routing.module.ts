@@ -6,7 +6,13 @@ import { plotRoutes } from './modules/plot/routes';
 import clientPlots  from './modules/client-plot/routes';
 import { salesRoutes } from './modules/sales/routes';
 
-const routes: Routes = [...cadastroEstadoRoute, ...plotRoutes, ...clientPlots, ...salesRoutes, ...dashboardRoute];
+const routes: Routes = [
+  ...cadastroEstadoRoute,
+  ...plotRoutes,
+  ...clientPlots,
+  ...salesRoutes,
+  ...dashboardRoute
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

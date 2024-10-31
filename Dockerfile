@@ -44,7 +44,7 @@ WORKDIR /usr/src/backend
 RUN npm install --production
 
 # Copy custom Nginx configuration (update paths as needed)
-COPY LandAssets/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Start both Nginx and NestJS backend in a single container
 ENV NODE_ENV=production
