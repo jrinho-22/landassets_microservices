@@ -25,7 +25,6 @@ export class PlotController {
 
   @MessagePattern('get/allPlots')
   findAllMessage() {
-    console.log('fell')
     return this.plotService.findAll();
   }
 

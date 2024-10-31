@@ -22,7 +22,7 @@ import { join } from 'path';
       ],
       isGlobal: true,
       validationSchema: Joi.object({
-          PORT: Joi.number().required(),
+          HTTP_PORT: Joi.number().required(),
           TCP_PORT: Joi.number().required(),
           AUTH_PORT: Joi.number().required(),
           AUTH_HOST: Joi.string().required(),

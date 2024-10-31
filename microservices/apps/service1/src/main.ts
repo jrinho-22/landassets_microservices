@@ -34,6 +34,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api/service1');
   await app.startAllMicroservices();
-  await app.listen(configService.get<string>('PORT'));
+  await app.listen(configService.get<string>('HTTP_PORT'));
 }
 bootstrap();

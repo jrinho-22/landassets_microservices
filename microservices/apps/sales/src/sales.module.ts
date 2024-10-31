@@ -18,7 +18,7 @@ import { APP_GUARD } from '@nestjs/core';
       ],
       isGlobal: true,
       validationSchema: Joi.object({
-        PORT: Joi.number().required(),
+        HTTP_PORT: Joi.number().required(),
         AUTH_PORT: Joi.number().required(),
         AUTH_HOST: Joi.string().required(),
         SERVICE1_PORT: Joi.number().required(),
