@@ -33,6 +33,6 @@ async function bootstrap() {
   app.setGlobalPrefix('api/sales');
   app.enableCors();
   await app.startAllMicroservices();
-  await app.listen(configService.get<string>('PORT'));
+  await app.listen(configService.get<string>('HTTP_PORT'));
 }
 bootstrap();
