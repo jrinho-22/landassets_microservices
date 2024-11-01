@@ -37,6 +37,10 @@ import { join } from 'path';
         JWT_EXPIRATION: Joi.number().required(),
         TCP_PORT: Joi.number().required(),
         HTTP_PORT: Joi.number().required(),
+        RABBITMQ_DEFAULT_USER: Joi.string().required(),
+        RABBITMQ_DEFAULT_PASS: Joi.string().required(),
+        RABBITMQ_DEFAULT_VHOST: Joi.string().required(),
+        RABBITMQ_HOST: Joi.string().required()
       }),
     }),
   ],

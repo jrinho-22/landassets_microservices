@@ -51,6 +51,7 @@ ENV NODE_ENV=production
 ENV RABBITMQ_DEFAULT_USER=user
 ENV RABBITMQ_DEFAULT_PASS=juninho22
 ENV RABBITMQ_DEFAULT_VHOST=docker-host
+ENV RABBITMQ_HOST=localhost
 
 CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && \
     node dist/apps/sales/main & \

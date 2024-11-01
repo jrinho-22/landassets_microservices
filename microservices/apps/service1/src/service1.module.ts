@@ -28,6 +28,10 @@ import { join } from 'path';
           AUTH_HOST: Joi.string().required(),
           SALE_PORT: Joi.number().required(),
           SALE_HOST: Joi.string().required(),
+          RABBITMQ_DEFAULT_USER: Joi.string().required(),
+          RABBITMQ_DEFAULT_PASS: Joi.string().required(),
+          RABBITMQ_DEFAULT_VHOST: Joi.string().required(),
+          RABBITMQ_HOST: Joi.string().required()
       }),
     }),
     PlotModule,

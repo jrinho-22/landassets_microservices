@@ -26,7 +26,8 @@ import { APP_GUARD } from '@nestjs/core';
         TCP_PORT: Joi.number().required(),
         RABBITMQ_DEFAULT_USER: Joi.string().required(),
         RABBITMQ_DEFAULT_PASS: Joi.string().required(),
-        RABBITMQ_DEFAULT_VHOST: Joi.string().required()
+        RABBITMQ_DEFAULT_VHOST: Joi.string().required(),
+        RABBITMQ_HOST: Joi.string().required()
       }),
     }),
     Common.DatabaseModule.forRoot([Sale]),

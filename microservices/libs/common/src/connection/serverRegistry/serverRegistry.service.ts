@@ -10,7 +10,8 @@ export class ServerRegistryService {
         const RABBITMQ_DEFAULT_USER = configService.get<string>('RABBITMQ_DEFAULT_USER')
         const RABBITMQ_DEFAULT_PASS = configService.get<string>('RABBITMQ_DEFAULT_PASS')
         const RABBITMQ_DEFAULT_VHOST = configService.get<string>('RABBITMQ_DEFAULT_VHOST')
-        this._rabitUrl = `amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbit:5672/${RABBITMQ_DEFAULT_VHOST}`
+        const RABBITMQ_HOST = configService.get<string>('RABBITMQ_HOST')
+        this._rabitUrl = `amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@${RABBITMQ_HOST}:5672/${RABBITMQ_DEFAULT_VHOST}`
     }
 
     microserviceCon(queue: string){
