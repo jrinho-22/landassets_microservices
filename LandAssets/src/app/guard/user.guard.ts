@@ -7,7 +7,7 @@ export const userGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
   
-  const autrorized: Observable<boolean> = authService.authenticated$.pipe(map(v => !!v.user?.admin))
+  const autrorized: Observable<boolean> = authService.authenticated$.pipe(map(v => v.user.type == 'admin'))
 
   return autrorized.pipe(map(v => {
     if (v) return v

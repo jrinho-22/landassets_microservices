@@ -17,6 +17,7 @@ import { cardCodigoMask, cardNumberMask, cardValidadeMask } from 'src/app/utils/
 import ISale from 'src/app/interfaces/ISale';
 import IFormParent from 'src/app/interfaces/IFormParent';
 import { CustomValidators } from 'src/app/utils/validators/CustomValidators';
+import IUser from 'src/app/interfaces/IUser';
 
 @Component({
   selector: 'app-modal-buy-plot',
@@ -100,7 +101,7 @@ export class ModalBuyPlotComponent implements IFormParent<ISale> {
   }
 
   ngAfterViewInit() {
-    this.auth.authenticated$.subscribe(v => this.userId = v.user?.userId)
+    this.auth.authenticated$.subscribe(v => this.userId = (v.user as IUser)?.userId)
   }
 
   paymentType() {

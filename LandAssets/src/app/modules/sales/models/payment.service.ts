@@ -12,12 +12,12 @@ import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Injectable()
 export class PaymentModel extends HttpRequestService<any> {
-  _user: IUser | null = null
+  _user!: IUser
 
   constructor(http: HttpClient, snackbarService: SnackbarService, authService: AuthService) {
     super(http, snackbarService);
     authService.authenticated$.subscribe(v => {
-      this._user = v.user
+      this._user = v.user as IUser
     })
   }
 

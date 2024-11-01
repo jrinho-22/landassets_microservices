@@ -16,7 +16,7 @@ import { MODAL_BUY_PLOT_VALUES } from '../../../../tokens/modal-token';
 import { BehaviorSubject } from 'rxjs';
 import IModalBuyPlotValues from 'src/app/interfaces/plot-actions/IModalBuyPlotValues';
 import { AuthService } from 'src/app/services/auth.service';
-import IUser from 'src/app/interfaces/IUser';
+import IUser, { IUserGuest } from 'src/app/interfaces/IUser';
 
 @Component({
   selector: 'app-plot-actions',
@@ -36,7 +36,7 @@ export class PlotActionsComponent {
   componentRef!: ComponentRef<any>;
   actionFun!: () => void;
   template: any;
-  user: IUser | null = null
+  user!: IUser | IUserGuest
 
   constructor(
     @Inject(MODAL_BUY_PLOT_VALUES)
@@ -60,8 +60,8 @@ export class PlotActionsComponent {
   }
 
   tootipText() {
+    if (this.user.type !== 'client') return 'Ação permitida apenas para usuarios logados'
     if (this.activePlot == undefined) return 'Plot ainda não selecionado'
-    if (this.user?.admin) return 'Ação não permitida para usuario admin'
     return ''
   }
 

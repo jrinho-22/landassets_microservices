@@ -58,7 +58,7 @@
         </div>
         <div class="actionButtons">
             <div>
-                <app-flat-button [tooltipText]="tootipText()" [disabled]="activePlot == undefined || (!!user?.admin)"
+                <app-flat-button [tooltipText]="tootipText()" [disabled]="activePlot == undefined || !(user.type == 'client')"
                     (buttonClick)="openDialog()" height="20px" text="BUY PLOT" />
                 <!-- <app-flat-button height="20px" text="ADD TO WISH LIST"/>
                 <app-flat-button height="20px" text="SELL PLOT"/> -->

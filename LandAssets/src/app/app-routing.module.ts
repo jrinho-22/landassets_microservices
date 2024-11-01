@@ -5,12 +5,14 @@ import cadastroEstadoRoute from './modules/estado/routes';
 import { plotRoutes } from './modules/plot/routes';
 import clientPlots  from './modules/client-plot/routes';
 import { salesRoutes } from './modules/sales/routes';
+import loginRoute from './views/login/routes';
 
 const routes: Routes = [
   ...cadastroEstadoRoute,
   ...plotRoutes,
   ...clientPlots,
   ...salesRoutes,
+  ...loginRoute,
   ...dashboardRoute
 ];
 

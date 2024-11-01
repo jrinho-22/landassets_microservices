@@ -18,6 +18,7 @@ export class PlotController {
     return this.plotService.create(createPlotDto);
   }
 
+  @Public()
   @Get()
   findBy(@Query() query?: Object): Promise<Plot[]> {
     return this.plotService.findBy(query);

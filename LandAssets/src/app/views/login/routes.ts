@@ -7,4 +7,4 @@ const loginRoute: Route = {
 };
 
 
-export default loginRoute
+export default [loginRoute]

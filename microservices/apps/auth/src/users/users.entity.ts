@@ -19,7 +19,7 @@ export class Users {
   password: string;
 
   @Column()
-  admin: boolean;
+  type: string;
 
   // @ManyToMany(
   //   () => Plot,

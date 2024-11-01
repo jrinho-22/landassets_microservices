@@ -1,4 +1,4 @@
-<section [class.Menu_reduzido]="isScrolledDown" class="Menu_desk">
+<section *ngIf="shouldShow" [class.Menu_reduzido]="isScrolledDown" class="Menu_desk">
 
     <div class="Menu_top">
         <div class="Menu_superior">
@@ -12,7 +12,6 @@
         <app-logo />
     </div>
     <div class="Menu_right">
-
 
         <div class="Menu_right_group">
             <div *ngFor="let item of items" class="Menu_right_drop_wrapper" (mouseleave)="onMouseLeave()">
@@ -65,7 +64,7 @@
 
 
         <div class="Menu_right_group">
-            <app-flat-button (buttonClick)="logout()" text="LOGOUT" />
+            <app-flat-button (buttonClick)="logAction()" [text]="logText()" />
             <!-- <app-flat-button text="BECOME AN AGENT" /> -->
         </div>
     </div>

@@ -5,9 +5,10 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
+      target: angular
     # command: ng serve --host 0.0.0.0 --watch
-    ports:
-      - 4201:80
+    # ports:
+    #   - 4201:80
     environment:
       NODE_ENV: development
     networks:
@@ -15,7 +16,19 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-      # - /usr/src/app/dist
+      - /usr/src/app/dist
+  nginx:
+    image: my-nginx
+    build: 
+      context: .
+      dockerfile: dockerfile
+      target: ngi
+    ports:
+      - 4201:80
+    networks:
+      - my-proxy-net
+    depends_on:
+      - front
 
 networks:
   my-proxy-net:

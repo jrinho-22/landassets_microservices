@@ -4,7 +4,7 @@ import { IMenuItems } from './interfaceMenuItems';
 import { NavigationEnd, Router, Event } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import IUser from 'src/app/interfaces/IUser';
+import IUser, { IUserGuest } from 'src/app/interfaces/IUser';
 
 @Component({
   selector: 'app-header',
@@ -13,14 +13,19 @@ import IUser from 'src/app/interfaces/IUser';
 })
 export class HeaderComponent {
   shouldScroll: boolean = true
+  shouldShow: boolean = true
   isScrolledDown: boolean = false;
   hoverItem: string = '';
   hoverChildrenItem: string = '';
   items: IMenuItems[] = menuItems;
   routerSubscription!: Subscription;
-  user: IUser | null = null;
+  user!: IUser | IUserGuest;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) {
+    this.authService.authenticated$.subscribe((v) => {
+      this.user = v.user;
+    });
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -34,18 +39,15 @@ export class HeaderComponent {
   }
 
   allowMenuItem({permission}: IMenuItems){
-    const admin = this.user?.admin
-    if (permission == 'all') return true
-    if (permission == 'admin' && admin) return true    
-    if (permission == 'client' && !admin) return true
+    if (permission.includes('all')) return true 
+
+    let type: 'admin' | 'client' | 'guest' = this.user.type
+    if (permission.includes(type)) return true  
     return false
   }
 
   ngOnInit() {
     this.checkPath()
-    this.authService.authenticated$.subscribe((v) => {
-      this.user = v.user;
-    });
     this.routerSubscription = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.checkPath(event);
@@ -56,12 +58,26 @@ export class HeaderComponent {
   private checkPath(event?: NavigationEnd) {
     const url = event ? event.url : this.router.url;
     this.shouldScroll = url.includes('dashboard');
+    this.shouldShow = !url.split('/').includes('login');
     this.isScrolledDown = !url.includes('dashboard');
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    window.location.reload();
+  logAction() {
+    if (this.user.type == 'guest') {
+      this.router.navigate(['login']);
+    } else {
+      localStorage.removeItem('token');
+      window.alert("Logout Successful")
+      this.router.navigate(['dashboard']);
+    }
+  }
+
+  logText() {
+    if (this.user.type == 'guest') {
+      return 'LOGIN'
+    } else {
+      return 'LOGOUT'
+    }
   }
 
   onMouseLeave() {

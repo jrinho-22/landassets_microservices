@@ -5,21 +5,26 @@ import { getPropertyFromResource } from '../utils/typeUtil/resourceKey';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { SnackbarService } from './snackbar.service';
-import IUser from '../interfaces/IUser';
+import IUser, { IUserGuest } from '../interfaces/IUser';
 import { authUrl } from '../helpers/urls';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService extends HttpRequestService<String> {
   private _authenticatedSubject = new BehaviorSubject<{
-    authenticated: 'conceded' | 'denied' | null;
-    user: IUser | null;
-  }>({ authenticated: null, user: null });
+    // authenticated: 'conceded' | 'denied';
+    user: IUser | IUserGuest;
+  }>({ user: {type: 'guest'} });
 
   private _authenticated$ = this.authenticatedSubject.asObservable();
 
-  constructor(http: HttpClient, snackbarService: SnackbarService) {
+  constructor(
+    http: HttpClient,
+    snackbarService: SnackbarService,
+    private router: Router,
+  ) {
     super(http, snackbarService);
 
     const token = localStorage.getItem('token');
@@ -28,11 +33,9 @@ export class AuthService extends HttpRequestService<String> {
       const userData = JSON.parse(atob(arrayToken[1]));
       this.getUser(userData.userId).subscribe((user: IUser) => {
         if (user) {
-          this._authenticatedSubject.next({ authenticated: 'conceded', user: user });
-        }
+          this._authenticatedSubject.next({user: user });
+        } 
       });
-    } else {
-      this._authenticatedSubject.next({ authenticated: 'denied', user: null })
     }
   }
 
@@ -47,12 +50,12 @@ export class AuthService extends HttpRequestService<String> {
     return this.http.get<IUser>(`${authUrl}/user/${userId}`, {
       headers: this._headers,
     }).pipe(
-      catchError((errorResponse: HttpErrorResponse) => {
-        if (errorResponse.error.message == "Unauthorized") {
-          this._authenticatedSubject.next({ authenticated: 'denied', user: null });
-        }
-        return throwError(() => new Error('Unauthorized Error'));
-      })
+      // catchError((errorResponse: HttpErrorResponse) => {
+        // if (errorResponse.error.message == "Unauthorized") {
+        //   this._authenticatedSubject.next({user: {type: 'guest'} });
+        // }
+        // return throwError(() => new Error('Unauthorized Error'));
+      // })
     );
   }
 
@@ -61,9 +64,10 @@ export class AuthService extends HttpRequestService<String> {
       (token: { access_token: string; user: IUser }) => {
         localStorage.setItem('token', token.access_token);
         this.authenticatedSubject.next({
-          authenticated: 'conceded',
+          // authenticated: 'conceded',
           user: token.user,
         });
+        this.router.navigate(['dashboard']);
       }
     );
   }
@@ -83,9 +87,9 @@ export class AuthService extends HttpRequestService<String> {
       .subscribe((token: { access_token: string; user: any }) => {
         localStorage.setItem('token', token.access_token);
         this.authenticatedSubject.next({
-          authenticated: 'conceded',
           user: token.user,
         });
+        this.router.navigate(['dashboard']);
       });
   }
 

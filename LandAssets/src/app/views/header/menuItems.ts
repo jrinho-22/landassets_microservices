@@ -2,7 +2,7 @@ import { IMenuItems } from "./interfaceMenuItems";
 
 const nav: IMenuItems[] = [
   {
-    permission: 'all',
+    permission: ['all'],
     label: 'HOME',
     path: 'dashboard'
     // children: [
@@ -13,7 +13,7 @@ const nav: IMenuItems[] = [
     // ],
   },
   {
-    permission: 'admin',
+    permission: ['admin'],
     label: 'SALES',
     path: 'view-sales/listar'
     // children: [
@@ -24,12 +24,12 @@ const nav: IMenuItems[] = [
     // ],
   },
   {
-    permission: 'client',
+    permission: ['client'],
     label: 'PLOTS',
     path: 'my-plots/listar'
   },
   {
-    permission: 'admin',
+    permission: ['admin'],
     label: 'MODULES',
     children: [
       {

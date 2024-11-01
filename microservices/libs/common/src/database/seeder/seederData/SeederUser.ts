@@ -7,7 +7,7 @@ export const userSeed: any = [
     phoneNumber: '091201920',
     password: '123',
     dob: new Date(1998, 0, 22),
-    admin: true
+    type: 'admin'
   },
   {
     name: 'client',
@@ -15,7 +15,7 @@ export const userSeed: any = [
     phoneNumber: '091201920',
     password: '123',
     dob: new Date(1998, 0, 22),
-    admin: false
+    type: 'client'
   },
 ];
 
