@@ -68,7 +68,7 @@ export class HeaderComponent {
     } else {
       localStorage.removeItem('token');
       window.alert("Logout Successful")
-      this.router.navigate(['dashboard']);
+      window.location.reload()
     }
   }
 
