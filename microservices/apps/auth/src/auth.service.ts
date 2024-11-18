@@ -24,7 +24,6 @@ export class AuthService {
     email: string,
     pass: string,
   ): Promise<{ access_token: string, user: Users }> {
-    console.log(email, pass)
     const user = await this.usersService.findByEmail(email);
     if (!user || user?.password !== pass) throw new NotFoundException('User not found');
     const payload = { userId: user.userId, username: user.email };

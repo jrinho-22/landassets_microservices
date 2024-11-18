@@ -11,8 +11,8 @@ services:
       - ./envs/service1/development.env # Specify the path to your custom env file
       - db.development.env
       - ./rabbit.env
-    ports:
-      - 3001:3001
+    # ports:
+      # - 3001:3001
     networks:
       - proxynet
     volumes:
@@ -35,8 +35,8 @@ services:
       - ./envs/sale/development.env # Specify the path to your custom env file
       - db.development.env
       - ./rabbit.env
-    ports:
-      - 3005:3005
+    # ports:
+      # - 3005:3005
     networks:
       - proxynet
     volumes:
@@ -55,8 +55,8 @@ services:
       dockerfile: apps/auth/Dockerfile
       target: development
     # command: npm run start:dev auth
-    ports:
-      - 3003:3003
+    # ports:
+    #   - 3003:3003
     networks:
       - proxynet
     volumes:

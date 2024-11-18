@@ -9,17 +9,17 @@ export class DashboardService {
   public activeState: BehaviorSubject<IStateDash> =
     new BehaviorSubject<IStateDash>({ state: StateEmpty, scroll: false });
 
-  public activePlot: BehaviorSubject<IPlot | undefined> = new BehaviorSubject<
-    IPlot | undefined
-  >(undefined);
+  // public activePlot: BehaviorSubject<IPlot | undefined> = new BehaviorSubject<
+  //   IPlot | undefined
+  // >(undefined);
 
-  constructor() {}
+  constructor() { }
 
-  activePlotObs$ = this.activePlot.asObservable();
+  // activePlotObs$ = this.activePlot.asObservable();
   activeStateObs$ = this.activeState.asObservable();
 
   setState(newState: IState, triggerScroll: boolean) {
     this.activeState.next({ state: newState, scroll: triggerScroll });
   }
-  
+
 }
