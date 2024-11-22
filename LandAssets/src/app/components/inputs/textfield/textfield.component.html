@@ -10,7 +10,7 @@
             (input)="onInput($event)" (focus)="onFocus()" (blur)="onBlur($event)" matInput [disabled]="disabled"
             [errorStateMatcher]="matcher"
             >
-        <span *ngIf="suffixAply" matTextSuffix>
+        <span *ngIf="suffixAply && value" matTextSuffix>
             {{suffixAply}}
         </span>
         <mat-error>{{ errorMsg }}</mat-error>

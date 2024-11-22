@@ -1,8 +1,7 @@
 <div class="plotActionsWrapper">
     <div class="content">
         <div class="contentLeft">
-            <app-carousel (pageEvent)="handlePageChange($event)"
-                [states]="states"
+            <app-carousel (pageEvent)="handlePageChange($event)" [states]="states"
                 [activeStateIndex]="activeStateIndex">
             </app-carousel>
         </div>
@@ -12,45 +11,46 @@
         <div class="contentRight">
             <div class="plotSearch">
                 <h2> Select Plot:</h2>
-                <app-select [ngStyle]="{'width': '10%', 'translate': '0 -10px'}" class="basic-style small" [syncValue]="activePlot" (dataEvent)="receiveSelectData($event)" placeholder="Num."
-                    value="number" label="number" [options]="plotsByState" />
+                <app-select [ngStyle]="{'width': '10%', 'translate': '0 -10px'}" class="basic-style small"
+                    (dataEvent)="receiveSelectData($event)" placeholder="Num." value="number" label="number"
+                    [options]="plotsByState" />
             </div>
             <div class="fields">
                 <ng-container [ngTemplateOutlet]="activePlot == undefined ? estateFields : plotsFields">
                     <ng-template #estateFields>
-                        <app-textfield class="fullwidth" [disabled]="true" [value]="stateFields.name"
+                        <app-textfield [loading]=loading class="fullwidth" [disabled]="true" [value]="stateFields.name"
                             placeholder="State" />
-                        <app-textfield type="number" suffix="m2" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading type="number" suffix="m2" class="fullwidth" [disabled]="true"
                             [value]="stateFields.size" placeholder="Size" />
-                        <app-textfield type="number" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading type="number" class="fullwidth" [disabled]="true"
                             [value]="stateFields.population" placeholder="Population" />
-                        <app-textfield type="number" class="fullwidth" [disabled]="true" [value]="stateFields.counties"
-                            placeholder="Conties" />
-                        <app-textfield class="fullwidth" [disabled]="true" [value]="stateFields.paymentTerm"
-                            placeholder="Payment Term" />
-                        <app-textfield type="numeric" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading type="number" class="fullwidth" [disabled]="true"
+                            [value]="stateFields.counties" placeholder="Conties" />
+                        <app-textfield [loading]=loading class="fullwidth" [disabled]="true"
+                            [value]="stateFields.paymentTerm" placeholder="Payment Term" />
+                        <app-textfield [loading]=loading type="numeric" class="fullwidth" [disabled]="true"
                             [value]="stateFields.averagePricePerSQM" placeholder="Average Price Per SQM " />
-                        <app-textfield type="numeric" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading type="numeric" class="fullwidth" [disabled]="true"
                             [value]="stateFields.averagePartialPaymentPrice"
                             placeholder="Average Partial Payment Price" />
-                        <app-textfield type="number" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading type="number" class="fullwidth" [disabled]="true"
                             [value]="stateFields.plotsAvailable" placeholder="Plots Available" />
-                        <app-textfield type="number" suffix="km" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading type="number" suffix="km" class="fullwidth" [disabled]="true"
                             [value]="stateFields.oceanDistance" placeholder="Ocean Distance" />
                     </ng-template>
                     <ng-template #plotsFields>
-                        <app-textfield class="fullwidth" [disabled]="true" [value]="activePlot?.number || 0"
-                            placeholder="Number" />
-                        <app-textfield type="numeric" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading class="fullwidth" [disabled]="true"
+                            [value]="activePlot?.number || 0" placeholder="Number" />
+                        <app-textfield [loading]=loading type="numeric" class="fullwidth" [disabled]="true"
                             [value]="activePlot?.pricePerSQM || 0" placeholder="Price Per SQM" />
-                        <app-textfield suffix="m2" class="fullwidth" [disabled]="true" [value]="activePlot?.size || 0"
-                            placeholder="Size" />
-                        <app-textfield type="numeric" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading suffix="m2" class="fullwidth" [disabled]="true"
+                            [value]="activePlot?.size || 0" placeholder="Size" />
+                        <app-textfield [loading]=loading type="numeric" class="fullwidth" [disabled]="true"
                             [value]="activePlot?.totalCashPrice || 0" placeholder="Total Cash Price" />
-                        <app-textfield type="numeric" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading type="numeric" class="fullwidth" [disabled]="true"
                             [value]="activePlot?.totalPartialPaymentPrice || 0"
                             placeholder="Total Partial Payment Price" />
-                        <app-textfield type="numeric" class="fullwidth" [disabled]="true"
+                        <app-textfield [loading]=loading type="numeric" class="fullwidth" [disabled]="true"
                             [value]="activePlot?.firstInstallment || 0" placeholder="First Installment" />
                     </ng-template>
                 </ng-container>
@@ -58,8 +58,9 @@
         </div>
         <div class="actionButtons">
             <div>
-                <app-flat-button [tooltipText]="tootipText()" [disabled]="activePlot == undefined || !(user.type == 'client')"
-                    (buttonClick)="openDialog()" height="20px" text="BUY PLOT" />
+                <app-flat-button [tooltipText]="tootipText()"
+                    [disabled]="activePlot == undefined || !(user.type == 'client')" (buttonClick)="openDialog()"
+                    height="20px" text="BUY PLOT" />
                 <!-- <app-flat-button height="20px" text="ADD TO WISH LIST"/>
                 <app-flat-button height="20px" text="SELL PLOT"/> -->
             </div>

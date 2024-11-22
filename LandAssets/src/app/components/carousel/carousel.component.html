@@ -1,21 +1,22 @@
-<div>
-    <p-carousel (onPage)="handlePageChange($event)" [page]=activeStateIndex [value]="myList" [circular]="true">
-        <ng-template let-state pTemplate="item">
-            <div class="contentWrapper">
-                <div class="topWrapper">
-                    <span> {{state.name}}</span>
+<ng-container *ngIf="myList.length; else noContent">
+    <div class="carousel-wrapper">
+        <p-carousel (onPage)="handlePageChange($event)" [page]=activeStateIndex [value]="myList" [circular]="true">
+            <ng-template let-state pTemplate="item">
+                <div class="contentWrapper">
+                    <div class="topWrapper">
+                        <span> {{state.name}}</span>
+                    </div>
+                    <div class="bottomWrapper">
+                        <ng-container *ngIf="state.img">
+                            <div class="imageWrapper">
+                                <advanced-image [cldImg]="state.img"></advanced-image>
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
-                <div class="bottomWrapper">
-                    <ng-container *ngIf="state.img">
-                        <div class="imageWrapper">
-                            <advanced-image [cldImg]="state.img"></advanced-image>
-                        </div>
-                    </ng-container>
-                </div>
-            </div>
-        </ng-template>
-    </p-carousel>
-    <!-- <h1>headerrr</h1>
+            </ng-template>
+        </p-carousel>
+        <!-- <h1>headerrr</h1>
 
     <ng-container *ngFor="let item of states">
         <ng-container *ngFor="let item2 of customRef">
@@ -28,4 +29,11 @@
         </ng-container>
     </ng-container>
     <ng-content></ng-content> -->
-</div>
+    </div>
+</ng-container>
+
+<ng-template #noContent>
+    <div class="no-content">
+        No states to show
+    </div>
+</ng-template>

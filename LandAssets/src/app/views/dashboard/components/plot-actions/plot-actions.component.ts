@@ -13,7 +13,7 @@ import { IStateDash } from '../../../../interfaces/plot-actions/IStateDash';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { MODAL_BUY_PLOT_VALUES } from '../../../../tokens/modal-token';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, of } from 'rxjs';
 import IModalBuyPlotValues from 'src/app/interfaces/plot-actions/IModalBuyPlotValues';
 import { AuthService } from 'src/app/services/auth.service';
 import IUser, { IUserGuest } from 'src/app/interfaces/IUser';
@@ -26,7 +26,7 @@ import IUser, { IUserGuest } from 'src/app/interfaces/IUser';
 })
 export class PlotActionsComponent {
   defaultStateIndex = 0;
-
+  loading = true
   states: IState[] = [];
   activeStateIndex: number = this.defaultStateIndex;
   stateFields: IState | IStateEmpty = StateEmpty;
@@ -50,13 +50,13 @@ export class PlotActionsComponent {
   }
 
   ngOnInit() {
-      this.authService.authenticated$.subscribe(({ user }) => {
-        this.user = user;
-      });
-      this.getStates();
-      this.subscribeToDashboardService();
-      this.modalBuyPlotValues.subscribe((v: IModalBuyPlotValues) => {
-      });
+    this.authService.authenticated$.subscribe(({ user }) => {
+      this.user = user;
+    });
+    this.getStates();
+    this.subscribeToDashboardService();
+    this.modalBuyPlotValues.subscribe((v: IModalBuyPlotValues) => {
+    });
   }
 
   tootipText() {
@@ -109,16 +109,27 @@ export class PlotActionsComponent {
   }
 
   getStates() {
-    this.EstateModel.getData('').subscribe((response: IState[]) => {
+    this.EstateModel.getData('')
+    .pipe(
+      catchError((error: any) => {
+        return of([])
+      })
+    )
+    .subscribe((response: IState[]) => {
       this.states = response;
       this.initialStateValues();
+      this.loading = false
     });
   }
 
   initialStateValues() {
-    this.stateFields = this.states[this.defaultStateIndex];
-    this.getPlotsByState(this.states[this.defaultStateIndex].estateId);
-    this.DashboardService.setState(this.states[this.defaultStateIndex], false);
+    if (this.states.length) {
+      this.stateFields = this.states[this.defaultStateIndex];      
+      this.getPlotsByState(this.states[this.defaultStateIndex].estateId);
+      this.DashboardService.setState(this.states[this.defaultStateIndex], false);
+    } else {
+      this.stateFields = StateEmpty;    
+    }
   }
 
   getPlotsByState(estateId: number) {

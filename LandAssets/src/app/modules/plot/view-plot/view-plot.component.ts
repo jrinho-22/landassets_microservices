@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import IPlot from 'src/app/interfaces/IPlot';
 import { PlotModel } from '../models/plot.service';
 import { baseRoute } from '../routes';
+import IState from 'src/app/interfaces/IState';
 
 @Component({
   selector: 'app-view-plot',
@@ -23,6 +24,6 @@ export class ViewPlotComponent {
 
   ngOnInit() {
     this.basePath = baseRoute
-    this.plotModel.getData('').subscribe((v: IPlot[]) => (this.plot = v));
+    this.plotModel.getData('').subscribe((v: IPlot[] | IState[]) => (this.plot = (v as IPlot[])));
   }
 }

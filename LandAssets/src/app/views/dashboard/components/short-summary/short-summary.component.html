@@ -5,11 +5,11 @@
             covered.
         </h5>
         <div class="buttons">
-            <app-select [syncValue]="selectedState" placeholder="STATE" value="name" label="name" [options]="states"
+            <app-select placeholder="STATE" value="name" label="name" [options]="states"
                 (dataEvent)="receiveSelectData($event)" />
         </div>
     </div>
 </div>
-<div class="lowerWrapper">
+<div *ngIf="states.length" class="lowerWrapper">
     <app-chart />
 </div>

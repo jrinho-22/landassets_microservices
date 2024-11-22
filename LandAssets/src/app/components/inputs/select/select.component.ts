@@ -27,26 +27,7 @@ export class SelectComponent<T> {
 
   selectedValue: any = undefined;
 
-  constructor(private zone: NgZone) { }
-
   sendData() {
     this.dataEvent.emit(this.selectedValue);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.syncValue) { 
-      this.zone.run(() => {
-        setTimeout(() => {
-         this.selectedValue = changes['syncValue'].currentValue[this.value];
-        }, 0);
-      });
-    } 
-    if (this.syncValue == undefined) {
-      this.zone.run(() => {
-        setTimeout(() => {
-          this.selectedValue = changes['syncValue'].currentValue
-        }, 0);
-      });
-    }
   }
 }

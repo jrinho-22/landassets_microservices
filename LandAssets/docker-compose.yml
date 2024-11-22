@@ -6,9 +6,6 @@ services:
       dockerfile: Dockerfile
       context: .
       target: angular
-    # command: ng serve --host 0.0.0.0 --watch
-    # ports:
-    #   - 4201:80
     environment:
       NODE_ENV: development
     networks:
@@ -23,6 +20,8 @@ services:
       context: .
       dockerfile: dockerfile
       target: ngi
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 4201:80
     networks:

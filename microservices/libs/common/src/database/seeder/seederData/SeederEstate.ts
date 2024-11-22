@@ -3,7 +3,7 @@
 export const estateSeed: any[] = [
     {
       name: 'New York',
-      mapId: 'mapa2_ycw9k5',
+      mapId: 'mapa3.jpg.jpg',
       mapName: 'mapa2',
       size: 54552,
       oceanDistance: 50,

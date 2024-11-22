@@ -47,7 +47,7 @@ export class TextfieldComponent implements ControlValueAccessor {
   subscriptions: Subscription = new Subscription();
   matcher = new MyErrorStateMatcher()
   currencyInputMask: InputmaskOptions<unknown> = currencyInputMask
-  loading = true
+  @Input() loading = false
 
   onChange: any = () => { };
   onTouch: any = () => { };
@@ -70,9 +70,9 @@ export class TextfieldComponent implements ControlValueAccessor {
     private injector: Injector,
     private cdRef: ChangeDetectorRef,
   ) {
-    setTimeout(() => {
-      this.loading = false      
-    }, 1400);
+    // setTimeout(() => {
+    //   this.loading = false      
+    // }, 5400);
     this.formSubmitted.subscribe(v => {
       if (v.formSubmitted) {
         this.matcher.form = this.controlContainer;
@@ -158,8 +158,8 @@ export class TextfieldComponent implements ControlValueAccessor {
 
   getValue() {
     if (this.type == 'number'){
-      this.value = (this.value as number).toLocaleString('pt-BR');
-      return this.suffix ? String(this.value + ' ' + this.suffix) : this.value
+      this.value = this.value?.toLocaleString('pt-BR') || null;
+      return this.suffix && this.value ? String(this.value + ' ' + this.suffix) : this.value
     }
     return this.value
   }

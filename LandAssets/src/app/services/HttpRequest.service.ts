@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, delay, of, throwError } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import resources from '../config/resources';
 import { SnackbarService } from './snackbar.service';
-import { environment } from 'src/environments/environment';
+import IState from '../interfaces/IState';
 
 @Injectable()
 export abstract class HttpRequestService<T> {
@@ -38,7 +38,17 @@ export abstract class HttpRequestService<T> {
     return this.http.get<T[]>(`${this.updatedUrl}`, {
       headers: this._headers,
       params: params,
-    });
+    }).pipe(
+      catchError((error: HttpErrorResponse ) => {
+        this.snackbarService.openSnack({
+          panel: 'error', message: error.error.message || `Erro loading ${this._config.resource}`
+        })
+        return throwError(() => error); 
+        // .pipe(
+        //   delay(3000)  // 2000 milliseconds = 2 seconds
+        // );
+      })
+    );
   }
 
   getItem(id: string | number, params?: any): Observable<T> {
