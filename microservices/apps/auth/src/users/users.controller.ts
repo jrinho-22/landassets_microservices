@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, UseGuards, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-users.dto';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
+import { JwtAuthGuard } from '@app/common';
 
 @Controller('user')
 export class UsersController {
@@ -26,7 +27,8 @@ export class UsersController {
   findAll() {
     return this.usersService.findAll();
   }
-
+  
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
@@ -42,3 +44,4 @@ export class UsersController {
     return this.usersService.remove(+id);
   }
 }
+

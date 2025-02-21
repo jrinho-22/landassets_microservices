@@ -43,6 +43,7 @@ export abstract class HttpRequestService<T> {
         this.snackbarService.openSnack({
           panel: 'error', message: error.error.message || `Erro loading ${this._config.resource}`
         })
+        window.location.reload();
         return throwError(() => error); 
         // .pipe(
         //   delay(3000)  // 2000 milliseconds = 2 seconds

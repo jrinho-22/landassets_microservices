@@ -50,12 +50,16 @@ export class AuthService extends HttpRequestService<String> {
     return this.http.get<IUser>(`${authUrl}/user/${userId}`, {
       headers: this._headers,
     }).pipe(
-      // catchError((errorResponse: HttpErrorResponse) => {
+      catchError((errorResponse: HttpErrorResponse) => {
         // if (errorResponse.error.message == "Unauthorized") {
         //   this._authenticatedSubject.next({user: {type: 'guest'} });
         // }
-        // return throwError(() => new Error('Unauthorized Error'));
-      // })
+        this.snackbarService.openSnack({
+          panel: 'error', message: `Session Expired`
+        })
+        localStorage.removeItem('token');
+        // return throwError(() => errorResponse);
+      })
     );
   }
 
