@@ -58,7 +58,7 @@ export class AuthService extends HttpRequestService<String> {
           panel: 'error', message: `Session Expired`
         })
         localStorage.removeItem('token');
-        // return throwError(() => errorResponse);
+        return throwError(() => undefined);
       })
     );
   }

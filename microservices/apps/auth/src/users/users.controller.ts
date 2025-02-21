@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-users.dto';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
-import { JwtAuthGuard } from '@app/common';
+import { JwtAuthGuard } from '../guards/jwt.auth-guard';
 
 @Controller('user')
 export class UsersController {

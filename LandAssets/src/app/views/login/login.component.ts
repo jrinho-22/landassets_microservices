@@ -24,8 +24,8 @@ export class LoginComponent {
   ) {     
     this.loginData = this.formBuilder.group({
       name: ['', [], CustomValidators.requiredIf(this.checkIfSignUp())],
-      email: ['',[ Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ['admin@gmail.com',[ Validators.required, Validators.email]],
+      password: ['123', Validators.required]
     });
   }
 

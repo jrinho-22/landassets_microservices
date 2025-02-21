@@ -44,7 +44,6 @@ export class AuthController {
   // @Public()
   // @UseGuards(LocalAuthGuard)
   @Post('login')
-  // @Post('login')
   async signIn(@Payload() signInDto: Record<string, any>) {
     return this.authService.signIn(signInDto.email, signInDto.password);
   }

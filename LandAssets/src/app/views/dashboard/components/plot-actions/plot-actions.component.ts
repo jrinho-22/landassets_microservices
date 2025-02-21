@@ -60,8 +60,8 @@ export class PlotActionsComponent {
   }
 
   tootipText() {
-    if (this.user.type !== 'client') return 'Ação permitida apenas para usuarios logados'
-    if (this.activePlot == undefined) return 'Plot ainda não selecionado'
+    if (this.user.type !== 'client') return 'User must be signed in'
+    if (this.activePlot == undefined) return 'Select a plot'
     return ''
   }
 
