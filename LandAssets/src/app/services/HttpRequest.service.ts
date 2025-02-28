@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, delay, of, throwError } from 'rxjs';
+import { Observable, catchError, combineLatest, combineLatestWith, concat, concatMap, delay, from, interval, map, of, retry, retryWhen, switchMap, takeWhile, tap, throwError, timer } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import resources from '../config/resources';
 import { SnackbarService } from './snackbar.service';
-import IState from '../interfaces/IState';
+import { count } from 'console';
 
 @Injectable()
 export abstract class HttpRequestService<T> {
   // protected _apiUrl: string = environment.API_URL;
   // protected _apiUrl: string
+  static _connected = { service1: false, auth: false, sales: false }
   private _config: { resource: string, apiUrl: string } = { resource: '', apiUrl: '' };
   private _token: string | null;
   protected _headers: HttpHeaders | undefined;
@@ -17,6 +18,9 @@ export abstract class HttpRequestService<T> {
   constructor(protected http: HttpClient, protected snackbarService: SnackbarService) {
     this._config = this.config();
     this._token = localStorage.getItem('token');
+    if (!HttpRequestService._connected.auth && !HttpRequestService._connected.sales && !HttpRequestService._connected.sales) {
+      this.connect()
+    }
 
     if (this._token) {
       this._headers = new HttpHeaders({
@@ -32,19 +36,47 @@ export abstract class HttpRequestService<T> {
   }
 
   // typeof resources[keyof typeof resources] accept all return types containning in resources
-  abstract config(): { resource: (typeof resources)[keyof typeof resources], apiUrl: string };
+  abstract config(): { resource: typeof resources[keyof typeof resources], apiUrl: string };
+
+  connect() {
+    console.log("connectttt", this.config())
+    const observables = [
+      this.http.get<{ value: "Connected" }>(`api/sales/connection`, { headers: this._headers }),
+      this.http.get<{ value: "Connected" }>(`api/auth/connection`, { headers: this._headers }),
+      this.http.get<{ value: "Connected" }>(`api/service1/connection`, { headers: this._headers }),
+    ];
+
+    interval(5000).pipe(
+      combineLatestWith(...observables),
+      // takeWhile(() => !HttpRequestService._connected.auth && !HttpRequestService._connected.sales && !HttpRequestService._connected.sales),
+      tap(([interval, sales, auth, service1]) => {
+        console.log(interval, sales)
+        if (sales.value == "Connected") HttpRequestService._connected.sales = true
+        if (auth.value == "Connected") HttpRequestService._connected.auth = true
+        if (service1.value == "Connected") HttpRequestService._connected.service1 = true
+      }),
+      retry({count: 55, delay: (error: HttpErrorResponse) => {
+        return timer(3000);
+      } }),
+      catchError(error => of([]))
+    ).subscribe({
+      next: (value) => console.log(value),
+      error: (error => console.log(error, 'erroo')),
+      complete: () => console.log('Complete'),
+    });
+  }
 
   getData(params?: any): Observable<T[]> {
     return this.http.get<T[]>(`${this.updatedUrl}`, {
       headers: this._headers,
       params: params,
     }).pipe(
-      catchError((error: HttpErrorResponse ) => {
+      catchError((error: HttpErrorResponse) => {
         this.snackbarService.openSnack({
           panel: 'error', message: error.error.message || `Erro loading ${this._config.resource}`
         })
         window.location.reload();
-        return throwError(() => error); 
+        return throwError(() => error);
         // .pipe(
         //   delay(3000)  // 2000 milliseconds = 2 seconds
         // );

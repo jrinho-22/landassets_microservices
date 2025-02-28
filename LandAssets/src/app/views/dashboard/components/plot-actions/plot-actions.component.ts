@@ -60,7 +60,7 @@ export class PlotActionsComponent {
   }
 
   tootipText() {
-    if (this.user.type !== 'client') return 'User must be signed in'
+    if (this.user.type !== 'client') return 'User not logged in as client'
     if (this.activePlot == undefined) return 'Select a plot'
     return ''
   }

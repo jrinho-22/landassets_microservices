@@ -4,12 +4,13 @@ import { CreateUserDto } from './users/dto/create-user.dto';
 import { LocalAuthGuard } from './guards/local.auth-guard';
 import { JwtAuthGuard } from './guards/jwt.auth-guard';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Public } from '@app/common';
 // import { Public } from './auth.contants';
 // import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @Controller('')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   // @Public()
   // @Post('auth/login')
@@ -34,7 +35,13 @@ export class AuthController {
   //     );
   // }
 
-  
+  @Public()
+  @Get("connection")
+  testConnection() {
+    return {value:"Connected"}
+  }
+
+
   @UseGuards(JwtAuthGuard)
   @MessagePattern('authenticate')
   async authenticate(@Payload() data: any) {
@@ -55,7 +62,7 @@ export class AuthController {
     // return this.authService.login(req.user);
     // return this.authService.signIn(signInDto.email, signInDto.password);
   }
-  
+
   // @Public()
   // @Post('login/register')
   @Post('login/register')

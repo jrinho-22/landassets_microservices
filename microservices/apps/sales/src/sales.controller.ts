@@ -34,6 +34,12 @@ export class SalesController {
     // })
   }
 
+  @Public()
+  @Get("connection")
+  testConnection() {
+    return {value: "Connected"}
+  }
+
   @Get(':id')
   async findByUser(@Param('id') id: string) {
     const users = this.authClient.send('get/allUser', '')
