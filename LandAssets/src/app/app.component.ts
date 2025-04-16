@@ -19,11 +19,8 @@ export class AppComponent {
   getLoading() {
     if (
       AuthService._connected.auth || AuthService._connected.sales || AuthService._connected.service1
-    ) {
-      return false
-    }
+    ) return false
     return true
-
   }
 
   // ngOnInit() {

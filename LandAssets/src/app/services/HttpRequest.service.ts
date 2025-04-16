@@ -39,30 +39,22 @@ export abstract class HttpRequestService<T> {
   abstract config(): { resource: typeof resources[keyof typeof resources], apiUrl: string };
 
   connect() {
-    console.log("connectttt", this.config())
     const observables = [
       this.http.get<{ value: "Connected" }>(`api/sales/connection`, { headers: this._headers }),
       this.http.get<{ value: "Connected" }>(`api/auth/connection`, { headers: this._headers }),
       this.http.get<{ value: "Connected" }>(`api/service1/connection`, { headers: this._headers }),
     ];
-
-    interval(5000).pipe(
-      combineLatestWith(...observables),
-      // takeWhile(() => !HttpRequestService._connected.auth && !HttpRequestService._connected.sales && !HttpRequestService._connected.sales),
-      tap(([interval, sales, auth, service1]) => {
-        console.log(interval, sales)
-        if (sales.value == "Connected") HttpRequestService._connected.sales = true
-        if (auth.value == "Connected") HttpRequestService._connected.auth = true
-        if (service1.value == "Connected") HttpRequestService._connected.service1 = true
-      }),
-      retry({count: 55, delay: (error: HttpErrorResponse) => {
+    combineLatest(observables).pipe(
+      retry({count: 10, delay: (error: HttpErrorResponse) => {
         return timer(3000);
       } }),
-      catchError(error => of([]))
     ).subscribe({
-      next: (value) => console.log(value),
       error: (error => console.log(error, 'erroo')),
-      complete: () => console.log('Complete'),
+      complete: () => {
+        HttpRequestService._connected.sales = true
+        HttpRequestService._connected.auth = true
+        HttpRequestService._connected.service1 = true
+      },
     });
   }
 
