@@ -7,5 +7,7 @@ Tools used:  <br>
 - Jwt for API authentication and authorization  <br>
 - Cloudinary for image storage <br>
 
-app: https://floating-bastion-17282-6323cc0086b5.herokuapp.com/dashboard
+app: https://floating-bastion-17282-6323cc0086b5.herokuapp.com/dashboard <br><br>
+
+Projeto temporariamente fora de serviço devido a problemas na plataforma de nuvem que hospeda a aplicação (Heroku).
 
