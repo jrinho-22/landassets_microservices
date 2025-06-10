@@ -9,5 +9,5 @@ Tools used:  <br>
 
 app: https://floating-bastion-17282-6323cc0086b5.herokuapp.com/dashboard <br><br>
 
-Projeto temporariamente fora de serviço devido a problemas na plataforma de nuvem que hospeda a aplicação (Heroku).
+Project temporarily out of service due to issues with the cloud platform hosting the application (Heroku).
 
